@@ -1,4 +1,4 @@
-# INotebook
+# Vehicle Travel Details Calculation
 This repository deals with the code base Vehicle Travel Distance Calculation project.
 <hr>
 <hr>
