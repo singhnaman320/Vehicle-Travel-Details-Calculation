@@ -14,7 +14,7 @@ const UploadTrip = () => {
   const handleUpload = async () => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("userId", "your_user_id"); // Get from auth context
+    formData.append("userId", "your_user_id"); // From auth context
 
     try {
       const response = await axios.post("/api/trips/upload", formData, {

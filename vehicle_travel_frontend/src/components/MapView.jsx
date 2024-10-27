@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
 import axios from 'axios';
-import Spinner from 'react-bootstrap/Spinner'; // Bootstrap spinner
+import Spinner from 'react-bootstrap/Spinner';
 
 const MapView = () => {
     const [tripData, setTripData] = useState(null);
