@@ -3,7 +3,7 @@ This repository deals with the code base Vehicle Travel Distance Calculation pro
 <hr>
 <hr>
 
-<h2>Tech-Stacks and Tools:</h2>
+<h2>Installed Packages</h2>
 <h3> Backend: </h3>
 npm init -y<br/>
 npm install express mongoose dotenv cors geolib multer jsonwebtoken bcryptjs csv-parser
