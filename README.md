@@ -16,7 +16,7 @@ This repository deals with the code base Vehicle Travel Distance Calculation pro
 <a><img src="https://www.pngall.com/wp-content/uploads/13/Mongodb-Transparent.png" height = "80" width = "80"></a>
 </td>
 <td width="20%" align="center">
-<h3 dir="auto"><span>React JS</span><br><br></h3>
+<h3 dir="auto"><span>React JS + Vite</span><br><br></h3>
 <a><img src="https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-png-transparent.png" height = "80" width = "80"></a>
 </td>
 <td width="20%" align="center">
