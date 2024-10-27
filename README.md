@@ -4,6 +4,16 @@ This repository deals with the code base Vehicle Travel Distance Calculation pro
 <hr>
 
 <h2>Tech-Stacks and Tools:</h2>
+<h3> Backend: </h3>
+npm init -y<br/>
+npm install express mongoose dotenv cors geolib multer jsonwebtoken bcryptjs csv-parser
+<h3> Frontend: </h3>
+npm create vite@latest <br/>
+npm install axios leaflet react-leaflet<br/>
+npm install react-bootstrap bootstrap
+<hr>
+
+<h2>Tech-Stacks and Tools:</h2>
 <table width = 100%>
 <tbody>
 <tr align="top">
