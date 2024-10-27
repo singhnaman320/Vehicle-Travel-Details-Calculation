@@ -25,7 +25,7 @@ This repository deals with the code base Vehicle Travel Distance Calculation pro
 </td>
 <td width="20%" align="center">
 <h3 dir="auto"><span>Node JS</span><br><br></h3>
-<a><img src="https://cdn-icons-png.flaticon.com/512/919/919825.png" height = "80" width = "80"></a>
+<a><img src="https://images.credly.com/images/51aeb74b-ec87-4069-93fc-0ea449c8d77f/twitter_thumb_201604_node.png" height = "80" width = "80"></a>
 </td>
 </tr>
 </td>
