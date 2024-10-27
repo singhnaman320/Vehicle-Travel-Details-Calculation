@@ -20,7 +20,7 @@ This repository deals with the code base Vehicle Travel Distance Calculation pro
 <a><img src="https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-png-transparent.png" height = "80" width = "80"></a>
 </td>
 <td width="20%" align="center">
-<h3 dir="auto"><span>CSS</span><br><br></h3>
+<h3 dir="auto"><span>Bootstrap CSS</span><br><br></h3>
 <a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/800px-CSS3_logo.svg.png" height = "80" width = "80"></a>
 </td>
 <td width="20%" align="center">
