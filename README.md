@@ -3,8 +3,26 @@ This repository deals with the code base Vehicle Travel Distance Calculation pro
 <hr>
 <hr>
 
-vehicle-travel-app/ <br/>
-│<br/>
+vehicle-travel-app/<br/>
+│
+├── backend/<br/>
+│   ├── controllers/<br/>
+│   │   ├── tripController.js<br/>
+│   │   └── authController.js<br/>
+│   ├── models/<br/>
+│   │   ├── Trip.js<br/>
+│   │   └── User.js<br/>
+│   ├── routes/
+│   │   ├── tripRoutes.js<br/>
+│   │   └── authRoutes.js<br/>
+│   ├── middleware/<br/>
+│   │   └── auth.js<br/>
+│   ├── config/<br/>
+│   │   └── db.js<br/>
+│   ├── .env<br/>
+│   ├── server.js<br/>
+│   └── package.json<br/>
+│
 ├── frontend/<br/>
 │   ├── src/<br/>
 │   │   ├── components/<br/>
@@ -18,26 +36,9 @@ vehicle-travel-app/ <br/>
 │   ├── public/<br/>
 │   ├── package.json<br/>
 │   └── .env<br/>
-│<br/>
-├── backend/<br/>
-│   ├── controllers/<br/>
-│   │   ├── authController.js<br/>
-│   │   └── tripController.js<br/>
-│   ├── models/<br/>
-│   │   ├── Trip.js<br/>
-│   │   └── User.js<br/>
-│   ├── routes/<br/>
-│   │   ├── authRoutes.js<br/>
-│   │   └── tripRoutes.js<br/>
-│   ├── config/<br/>
-│   │   └── db.js<br/>
-│   ├── middleware/<br/>
-│   │   └── auth.js<br/>
-│   ├── .env<br/>
-│   ├── server.js<br/>
-│   └── package.json<br/>
-|<br/>
+│
 └── README.md<br/>
+
 
 <hr>
 <h2>Installed Packages:</h2>
