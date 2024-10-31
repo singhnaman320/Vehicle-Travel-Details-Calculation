@@ -3,6 +3,43 @@ This repository deals with the code base Vehicle Travel Distance Calculation pro
 <hr>
 <hr>
 
+vehicle-travel-app/ <br/>
+│<br/>
+├── frontend/<br/>
+│   ├── src/<br/>
+│   │   ├── components/<br/>
+│   │   │   ├── MapView.jsx<br/>
+│   │   │   ├── Login.jsx<br/>
+│   │   │   ├── Register.jsx<br/>
+│   │   │   └── UploadTrip.jsx<br/>
+│   │   ├── App.jsx<br/>
+│   │   ├── main.jsx<br/>
+│   │   └── router.js<br/>
+│   ├── public/<br/>
+│   ├── package.json<br/>
+│   └── .env<br/>
+│<br/>
+├── backend/<br/>
+│   ├── controllers/<br/>
+│   │   ├── authController.js<br/>
+│   │   └── tripController.js<br/>
+│   ├── models/<br/>
+│   │   ├── Trip.js<br/>
+│   │   └── User.js<br/>
+│   ├── routes/<br/>
+│   │   ├── authRoutes.js<br/>
+│   │   └── tripRoutes.js<br/>
+│   ├── config/<br/>
+│   │   └── db.js<br/>
+│   ├── middleware/<br/>
+│   │   └── auth.js<br/>
+│   ├── .env<br/>
+│   ├── server.js<br/>
+│   └── package.json<br/>
+|<br/>
+└── README.md<br/>
+
+<hr>
 <h2>Installed Packages:</h2>
 <h3> Backend: </h3>
 npm init -y<br/>
