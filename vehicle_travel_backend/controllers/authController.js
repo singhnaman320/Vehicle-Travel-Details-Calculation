@@ -3,10 +3,10 @@ const jwt = require('jsonwebtoken');
 
 // Register new user
 const registerUser = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, email } = req.body; // Add email to destructuring
     try {
-        const user = await User.create({ username, password });
-        res.status(201).json({ _id: user._id, username: user.username });
+        const user = await User.create({ username, password, email }); // Include email in user creation
+        res.status(201).json({ _id: user._id, username: user.username, email: user.email }); // Return email
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

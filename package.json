@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start": "concurrently \"npm run dev --prefix vehicle_travel_backend\" \"npm run dev --prefix vehicle_travel_frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
