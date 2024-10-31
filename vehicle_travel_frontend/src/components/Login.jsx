@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -14,7 +16,8 @@ const Login = () => {
         username,
         password,
       });
-      localStorage.setItem("token", response.data.token);
+      // Pass both token and userId to `login`
+      login(response.data.token, response.data.userId);
       navigate("/upload");
     } catch (error) {
       console.error("Login failed", error);

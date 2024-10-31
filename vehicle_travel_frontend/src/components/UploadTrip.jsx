@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Button, Form, Alert } from "react-bootstrap";
+import { useAuth } from "../contexts/AuthContext";
 
 const UploadTrip = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const { userId, token } = useAuth(); // Access `userId` and `token` from context
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -14,17 +16,17 @@ const UploadTrip = () => {
   const handleUpload = async () => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("userId", "your_user_id"); // From auth context
-
     try {
       const response = await axios.post("/api/trips/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          authorization: `Bearer ${token}`, // Include token in headers
         },
       });
       setMessage("Upload successful: " + response.data._id);
       setError("");
     } catch (error) {
+      console.error("Upload failed", error); // Log the entire error object
       setError("Upload failed: " + error.response.data.message);
       setMessage("");
     }
