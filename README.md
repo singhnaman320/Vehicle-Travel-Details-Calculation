@@ -4,7 +4,7 @@ This repository deals with the code base Vehicle Travel Distance Calculation pro
 <hr>
 
 vehicle-travel-app/<br/>
-│
+│<br/>
 ├── backend/<br/>
 │   ├── controllers/<br/>
 │   │   ├── tripController.js<br/>
@@ -22,7 +22,7 @@ vehicle-travel-app/<br/>
 │   ├── .env<br/>
 │   ├── server.js<br/>
 │   └── package.json<br/>
-│
+│<br/>
 ├── frontend/<br/>
 │   ├── src/<br/>
 │   │   ├── components/<br/>
@@ -36,7 +36,7 @@ vehicle-travel-app/<br/>
 │   ├── public/<br/>
 │   ├── package.json<br/>
 │   └── .env<br/>
-│
+│<br/>
 └── README.md<br/>
 
 
