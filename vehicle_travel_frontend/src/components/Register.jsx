@@ -21,14 +21,14 @@ const Register = () => {
   };
 
   return (
-    <div class="wrapper">
-      <div class="logo">
+    <div className="wrapper">
+      <div className="logo">
         <img src={travelLogo} alt="" />
       </div>
-      {/* <div class="text-center mt-4 name">Register</div> */}
+      {/* <div className="text-center mt-4 name">Register</div> */}
       <form onSubmit={handleRegister} className="p-3 mt-3">
-        <div class="form-field d-flex align-items-center">
-          <span class="far fa-user"></span>
+        <div className="form-field d-flex align-items-center">
+          <span className="far fa-user"></span>
           <input
             type="text"
             placeholder="Username"
@@ -39,8 +39,8 @@ const Register = () => {
             required
           />
         </div>
-        <div class="form-field d-flex align-items-center">
-          <span class="fas fa-envelope"></span>
+        <div className="form-field d-flex align-items-center">
+          <span className="fas fa-envelope"></span>
           <input
             type="email"
             placeholder="email"
@@ -51,8 +51,8 @@ const Register = () => {
             required
           />
         </div>
-        <div class="form-field d-flex align-items-center">
-          <span class="fas fa-key"></span>
+        <div className="form-field d-flex align-items-center">
+          <span className="fas fa-key"></span>
           <input
             type="password"
             placeholder="Password"
@@ -67,7 +67,7 @@ const Register = () => {
           Register
         </button>
       </form>
-      <div class="text-center fs-6">
+      <div className="text-center fs-6">
         <p>
           Already a user, Login here <Link to="/">Login</Link>
         </p>
