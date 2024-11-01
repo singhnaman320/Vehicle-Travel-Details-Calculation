@@ -1,15 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Form, Alert, Card, Container } from "react-bootstrap";
+import { Button, Form, Alert, Card, Container, Modal } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import "../style/UploadTrip.css"; // Add this CSS file for custom styles if needed
+import "../style/UploadTrip.css";
 import illustrationLogo from "../assets/illustration.png";
 
 const UploadTrip = () => {
   const [file, setFile] = useState(null);
+  const [tripName, setTripName] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const { userId, token } = useAuth(); // Access `userId` and `token` from context
+  const [trips, setTrips] = useState([]); // Store uploaded trips
+  const [showModal, setShowModal] = useState(false);
+  const { userId, token } = useAuth();
+
+  useEffect(() => {
+    const fetchTrips = async () => {
+      try {
+        const response = await axios.get("/api/trips");
+        setTrips(response.data);
+      } catch (error) {
+        console.error("Error fetching trips:", error);
+      }
+    };
+
+    fetchTrips();
+  }, []);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -18,28 +34,47 @@ const UploadTrip = () => {
   const handleUpload = async () => {
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("tripName", tripName);
     try {
       const response = await axios.post("/api/trips/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          authorization: `Bearer ${token}`, // Include token in headers
+          authorization: `Bearer ${token}`,
         },
       });
-      // response.data._id
       setMessage("CSV file uploaded successfully");
       setError("");
-      setFile(null); // Clear the file input
-      document.getElementById("formFile").value = ""; // Clear the file input field
+      setTrips([...trips, response.data]);
+      setFile(null);
+      setTripName("");
+      setShowModal(false);
+      document.getElementById("formFile").value = "";
       setTimeout(() => {
-        setMessage(""); // Clear the success message after 2 seconds
+        setMessage("");
       }, 2000);
     } catch (error) {
-      console.error("Upload failed", error); // Log the entire error object
-      // error.response.data.message
+      console.error("Upload failed", error);
       setError("Upload failed: Check upload of your CSV file");
       setMessage("");
       setTimeout(() => {
-        setError(""); // Clear the error message after 2 seconds
+        setError("");
+      }, 2000);
+    }
+  };
+
+  const handleDeleteTrip = async (tripId) => {
+    try {
+      await axios.delete(`/api/trips/${tripId}`);
+      setTrips(trips.filter((trip) => trip._id !== tripId));
+      setMessage("Trip deleted successfully");
+      setTimeout(() => {
+        setMessage("");
+      }, 2000);
+    } catch (error) {
+      console.error("Error deleting trip:", error);
+      setError("Error deleting trip");
+      setTimeout(() => {
+        setError("");
       }, 2000);
     }
   };
@@ -90,28 +125,10 @@ const UploadTrip = () => {
               className="d-flex justify-content-center mt-5"
               style={{ position: "relative", top: "10px" }}
             >
-              <Form className="mt-3 w-75 d-flex justify-content-center">
-                <Form.Group controlId="formFile" className="w-100">
-                  <Form.Control type="file" onChange={handleFileChange} />
-                </Form.Group>
-              </Form>
-            </div>
-
-            <div
-              className="d-flex justify-content-center mt-5"
-              style={{
-                fontFamily: "Roboto, sans-serif",
-                fontSize: "16px",
-                fontWeight: 400,
-                lineHeight: "16px",
-                letterSpacing: "0.01em",
-                textAlign: "left",
-              }}
-            >
               <Button
                 variant="dark"
                 className="upload-button mb-2"
-                onClick={handleUpload}
+                onClick={() => setShowModal(true)} // Open modal
               >
                 Upload Trip
               </Button>
@@ -134,6 +151,108 @@ const UploadTrip = () => {
             </p>
           </Card.Body>
         </Card>
+      </Container>
+
+      {/* Modal for file upload */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          {/* <Modal.Title >Upload Trip</Modal.Title> */}
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="tripName">
+              <Form.Label
+                style={{
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "16px",
+                  fontWeight: 400,
+                  lineHeight: "16px",
+                  letterSpacing: "0.01em",
+                  textAlign: "left",
+                }}
+              >
+                Trip Name
+              </Form.Label>
+              <Form.Control
+                type="text"
+                value={tripName}
+                onChange={(e) => setTripName(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group
+              controlId="formFile"
+              className="mt-3"
+              style={{
+                fontFamily: "Roboto, sans-serif",
+                fontSize: "16px",
+                fontWeight: 400,
+                lineHeight: "16px",
+                letterSpacing: "0.01em",
+                textAlign: "left",
+              }}
+            >
+              <Form.Control type="file" onChange={handleFileChange} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setShowModal(false)}
+            style={{
+              fontFamily: "Roboto, sans-serif",
+              fontSize: "16px",
+              fontWeight: 400,
+              lineHeight: "16px",
+              letterSpacing: "0.01em",
+              textAlign: "left",
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="dark"
+            onClick={handleUpload}
+            style={{
+              fontFamily: "Roboto, sans-serif",
+              fontSize: "16px",
+              fontWeight: 400,
+              lineHeight: "16px",
+              letterSpacing: "0.01em",
+              textAlign: "left",
+            }}
+          >
+            Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Your Trips Section */}
+      <Container className="mt-4">
+        <h5>Your Trips</h5>
+        <div className="trip-list">
+          {trips.map((trip) => (
+            <div
+              key={trip._id}
+              className="d-flex justify-content-between align-items-center"
+            >
+              <span>{trip.tripName}</span>
+              <div>
+                <Button variant="link" className="me-2">
+                  Open
+                </Button>
+                <Button
+                  variant="link"
+                  className="text-danger"
+                  onClick={() => handleDeleteTrip(trip._id)}
+                >
+                  Delete
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
       </Container>
     </div>
   );
