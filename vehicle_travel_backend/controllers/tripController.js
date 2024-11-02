@@ -12,8 +12,8 @@ const uploadTrip = async (req, res) => {
 
   const gpsData = [];
   let totalDistance = 0;
-  let idlingDuration = 0; // Placeholder, replace with actual calculation logic
-  let stoppageDuration = 0; // Placeholder, replace with actual calculation logic
+  let idlingDuration = 0; 
+  let stoppageDuration = 0; 
 
   fs.createReadStream(req.file.path)
     .pipe(csv())
@@ -78,4 +78,14 @@ const deleteTrip = async (req, res) => {
   }
 };
 
-module.exports = { uploadTrip, getTrips, deleteTrip };
+const getTripById = async (req, res) => {
+  try {
+      const trip = await Trip.findOne({ _id: req.params.tripId, userId: req.user._id });
+      if (!trip) return res.status(404).json({ message: "Trip not found" });
+      res.json(trip);
+  } catch (error) {
+      res.status(500).json({ message: "Error fetching trip", error });
+  }
+};
+
+module.exports = { uploadTrip, getTrips, deleteTrip, getTripById };

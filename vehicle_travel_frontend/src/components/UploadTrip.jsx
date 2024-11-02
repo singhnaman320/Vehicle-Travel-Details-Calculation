@@ -76,8 +76,8 @@ const UploadTrip = () => {
   };
 
   const navigate = useNavigate();
-  const handleOpenMap = () => {
-    navigate("/map");
+  const handleOpenMap = (tripId) => {
+    navigate("/map", { state: { selectedTripId: tripId } });
   };
 
   // Pagination logic
@@ -261,7 +261,7 @@ const UploadTrip = () => {
                     marginRight: "5px",
                     marginTop: "10px"
                   }}
-                  onClick={handleOpenMap}
+                  onClick={() => handleOpenMap(trip._id)} // Pass trip ID here
                 >
                   Open
                 </Button>
@@ -287,25 +287,17 @@ const UploadTrip = () => {
             </div>
           ))}
         </div>
-        {/* Pagination Controls */}
-        <div className="pagination mt-3 justify-content-center mb-3">
-          <Button
-            variant="outline-secondary"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </Button>
-          <span className="mx-2">
-            Page {currentPage} of {totalPages}
-          </span>
-          <Button
-            variant="outline-secondary"
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </Button>
+        <div className="pagination mt-3 justify-content-center">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <Button
+              key={index}
+              variant="light"
+              onClick={() => setCurrentPage(index + 1)}
+              className={currentPage === index + 1 ? "active" : ""}
+            >
+              {index + 1}
+            </Button>
+          ))}
         </div>
       </Container>
     </div>
