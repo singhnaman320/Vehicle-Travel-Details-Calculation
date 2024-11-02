@@ -30,9 +30,9 @@ vehicle-travel-app/<br/>
 │   │   │   ├── Login.jsx<br/>
 │   │   │   ├── Register.jsx<br/>
 │   │   │   └── UploadTrip.jsx<br/>
-|   |   |__ contexts
-|   |   |   |__ AuthContext.jsx
-|   |   |
+|   |   |__ contexts<br/>
+|   |   |   |__ AuthContext.jsx<br/>
+|   |   |<br/>
 │   │   ├── App.jsx<br/>
 │   │   ├── main.jsx<br/>
 │   │   └── router.js<br/>
