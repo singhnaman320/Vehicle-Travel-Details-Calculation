@@ -42,6 +42,8 @@ vehicle-travel-app/<br/>
 
 <hr>
 <h2>Installed Packages:</h2>
+<h3> In root Package:: </h3>
+Nodemon & Cuncurrently : For automatically restarting the server and run both Frontend and Backend together
 <h3> Backend: </h3>
 npm init -y<br/>
 npm install express mongoose dotenv cors geolib multer jsonwebtoken bcryptjs csv-parser
@@ -81,6 +83,18 @@ npm install react-bootstrap bootstrap
 </tbody>
 </table>
 
+<hr>
+<h2>Functional Details:</h2>
+<h3> To run both Frontend and Backend at the same time: </h3>
+npm start<br/>
+
+<h3> Steps: </h3>
+1. User Login <br/>
+2. For no login credentials, Go to Register page. After registration, user data will be saved into MongoDB database. Now again try for login<br/>
+3. As soon as User login a Token will be generated which will be different for different user so that we can verify user each time. This token will be saved into browser storage because if we store generated token into everytime into database, then it will increase burden on database and also on data retrival process.
+4. Now, once user login, we will be redirect user to trip upload page using CSV. Here user can upload CSV file and can see list of their trips. Here, buttons are provided for open your trip or delete your trip in each of the trip row. Clicking on open can open the trip in different page where tripName, gpsData, distance, duration, idlingDuration, stoppageDuration etc. can be shown.
+
+[NOTE]: No user can see other user details.
 <hr>
 
 
