@@ -82,7 +82,7 @@ button:focus-visible {
 
 body {
     /* background: #ecf0f3; */
-    background: linear-gradient(to bottom, #fff 0%, #162d3b 50%, #162d3b 50%, #fff 100%);
+    background: linear-gradient(to bottom, #fff 0%, #fff 50%, #fff 50%, #fff 100%);
 
 }
 

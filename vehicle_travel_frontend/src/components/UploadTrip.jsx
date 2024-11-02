@@ -14,6 +14,10 @@ const UploadTrip = () => {
   const [showModal, setShowModal] = useState(false);
   const { userId, token } = useAuth();
 
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tripsPerPage] = useState(10); // 10 trips per page
+
   useEffect(() => {
     const fetchTrips = async () => {
       try {
@@ -69,6 +73,12 @@ const UploadTrip = () => {
       setTimeout(() => setError(""), 2000);
     }
   };
+
+  // Pagination logic
+  const indexOfLastTrip = currentPage * tripsPerPage;
+  const indexOfFirstTrip = indexOfLastTrip - tripsPerPage;
+  const currentTrips = trips.slice(indexOfFirstTrip, indexOfLastTrip);
+  const totalPages = Math.ceil(trips.length / tripsPerPage);
 
   return (
     <div>
@@ -223,7 +233,7 @@ const UploadTrip = () => {
           Your Trips
         </h5>
         <div className="trip-list">
-          {trips.map((trip) => (
+          {currentTrips.map((trip) => (
             <div
               key={trip._id}
               className="d-flex justify-content-between align-items-center"
@@ -243,6 +253,7 @@ const UploadTrip = () => {
                     textDecoration: "none",
                     border: "2px solid green",
                     marginRight: "5px",
+                    marginTop: "10px"
                   }}
                 >
                   Open
@@ -260,6 +271,7 @@ const UploadTrip = () => {
                     textAlign: "left",
                     textDecoration: "none",
                     border: "2px solid red",
+                    marginTop: "10px"
                   }}
                 >
                   Delete
@@ -268,10 +280,27 @@ const UploadTrip = () => {
             </div>
           ))}
         </div>
+        {/* Pagination Controls */}
+        <div className="pagination mt-3 justify-content-center mb-3">
+          <Button
+            variant="outline-secondary"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </Button>
+          <span className="mx-2">
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button
+            variant="outline-secondary"
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </Button>
+        </div>
       </Container>
-
-      {/* {error && <Alert variant="danger">{error}</Alert>}
-      {message && <Alert variant="success">{message}</Alert>} */}
     </div>
   );
 };
