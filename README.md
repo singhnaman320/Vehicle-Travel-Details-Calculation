@@ -93,7 +93,7 @@ npm start<br/>
 <br/>
 2. For no login credentials, Go to Register page. After registration, user data will be saved into MongoDB database. Now again try for login<br/>
 <br/>
-3. As soon as User login a Token will be generated which will be different for different user so that we can verify user each time. This token will be saved into browser storage because if we store generated token into everytime into database, then it will increase burden on database and also on data retrival process.<br/>
+3. As soon as User login a Token will be generated which will be different for different user so that we can verify user each time. This token will be saved into browser storage because if we store generated token everytime into database, then it will increase burden on database and also on data retrival process.<br/>
 <br/>
 4. Now, once user login, we will be redirect user to trip upload page using CSV. Here user can upload CSV file and can see list of their trips. Here, buttons are provided for open your trip or delete your trip in each of the trip row. Clicking on open can open the trip in different page where tripName, gpsData, distance, duration, idlingDuration, stoppageDuration etc. can be shown.<br/>
 <br/>
