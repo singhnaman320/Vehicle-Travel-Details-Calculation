@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Form, Alert, Card, Container, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import "../style/UploadTrip.css";
 import illustrationLogo from "../assets/illustration.png";
@@ -72,6 +73,11 @@ const UploadTrip = () => {
       setError("Error deleting trip");
       setTimeout(() => setError(""), 2000);
     }
+  };
+
+  const navigate = useNavigate();
+  const handleOpenMap = () => {
+    navigate("/map");
   };
 
   // Pagination logic
@@ -255,6 +261,7 @@ const UploadTrip = () => {
                     marginRight: "5px",
                     marginTop: "10px"
                   }}
+                  onClick={handleOpenMap}
                 >
                   Open
                 </Button>
