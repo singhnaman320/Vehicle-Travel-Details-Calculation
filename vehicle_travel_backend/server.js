@@ -5,6 +5,7 @@ const connectDB = require('./config/db');
 const tripRoutes = require('./routes/tripRoutes');
 const authRoutes = require('./routes/authRoutes');
 const { protect } = require('./middleware/auth');
+
 require('dotenv').config();
 
 const app = express();

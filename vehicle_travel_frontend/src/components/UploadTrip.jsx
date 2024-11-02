@@ -10,26 +10,25 @@ const UploadTrip = () => {
   const [tripName, setTripName] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [trips, setTrips] = useState([]); // Store uploaded trips
+  const [trips, setTrips] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const { userId, token } = useAuth();
 
   useEffect(() => {
     const fetchTrips = async () => {
       try {
-        const response = await axios.get("/api/trips");
+        const response = await axios.get("/api/trips", {
+          headers: { authorization: `Bearer ${token}` },
+        });
         setTrips(response.data);
       } catch (error) {
         console.error("Error fetching trips:", error);
       }
     };
-
     fetchTrips();
-  }, []);
+  }, [token]);
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
+  const handleFileChange = (e) => setFile(e.target.files[0]);
 
   const handleUpload = async () => {
     const formData = new FormData();
@@ -43,39 +42,31 @@ const UploadTrip = () => {
         },
       });
       setMessage("CSV file uploaded successfully");
-      setError("");
       setTrips([...trips, response.data]);
       setFile(null);
       setTripName("");
       setShowModal(false);
       document.getElementById("formFile").value = "";
-      setTimeout(() => {
-        setMessage("");
-      }, 2000);
+      setTimeout(() => setMessage(""), 2000);
     } catch (error) {
       console.error("Upload failed", error);
       setError("Upload failed: Check upload of your CSV file");
-      setMessage("");
-      setTimeout(() => {
-        setError("");
-      }, 2000);
+      setTimeout(() => setError(""), 2000);
     }
   };
 
   const handleDeleteTrip = async (tripId) => {
     try {
-      await axios.delete(`/api/trips/${tripId}`);
+      await axios.delete(`/api/trips/${tripId}`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       setTrips(trips.filter((trip) => trip._id !== tripId));
       setMessage("Trip deleted successfully");
-      setTimeout(() => {
-        setMessage("");
-      }, 2000);
+      setTimeout(() => setMessage(""), 2000);
     } catch (error) {
       console.error("Error deleting trip:", error);
       setError("Error deleting trip");
-      setTimeout(() => {
-        setError("");
-      }, 2000);
+      setTimeout(() => setError(""), 2000);
     }
   };
 
@@ -95,20 +86,18 @@ const UploadTrip = () => {
       </div>
       <Container className="upload-trip-container mt-4 d-flex flex-column align-items-center">
         <Card className="text-left w-75">
-          <Card.Header className="bg-light w-1200">
-            <h5
-              className="mb-0"
-              style={{
-                fontFamily: "Roboto, sans-serif",
-                fontSize: "16px",
-                fontWeight: 400,
-                lineHeight: "16px",
-                letterSpacing: "0.01em",
-                textAlign: "left",
-              }}
-            >
-              👋 Welcome, User
-            </h5>
+          <Card.Header
+            className="bg-light w-1200 mb-0"
+            style={{
+              fontFamily: "Roboto, sans-serif",
+              fontSize: "16px",
+              fontWeight: 400,
+              lineHeight: "16px",
+              letterSpacing: "0.01em",
+              textAlign: "left",
+            }}
+          >
+            👋 Welcome, User
           </Card.Header>
           <Card.Body>
             <div
@@ -117,25 +106,20 @@ const UploadTrip = () => {
             >
               <img
                 src={illustrationLogo}
-                alt="Illustration of map upload"
-                className="img-fluid"
+                alt="Illustration"
+                className="img-fluid mb-3"
               />
             </div>
             <div
               className="d-flex justify-content-center mt-5"
               style={{ position: "relative", top: "10px" }}
             >
-              <Button
-                variant="dark"
-                className="upload-button mb-2"
-                onClick={() => setShowModal(true)} // Open modal
-              >
+              <Button variant="dark" onClick={() => setShowModal(true)}>
                 Upload Trip
               </Button>
             </div>
-
             <p
-              className="text-muted text-center"
+              className="text-muted text-center mt-2"
               style={{
                 fontFamily: "Roboto, sans-serif",
                 fontSize: "16px",
@@ -153,11 +137,8 @@ const UploadTrip = () => {
         </Card>
       </Container>
 
-      {/* Modal for file upload */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          {/* <Modal.Title >Upload Trip</Modal.Title> */}
-        </Modal.Header>
+        <Modal.Header closeButton />
         <Modal.Body>
           <Form>
             <Form.Group controlId="tripName">
@@ -228,9 +209,19 @@ const UploadTrip = () => {
         </Modal.Footer>
       </Modal>
 
-      {/* Your Trips Section */}
       <Container className="mt-4">
-        <h5>Your Trips</h5>
+        <h5
+          style={{
+            fontFamily: "Roboto, sans-serif",
+            fontSize: "24px",
+            fontWeight: 700,
+            lineHeight: "24px",
+            letterSpacing: "0.01em",
+            textAlign: "left",
+          }}
+        >
+          Your Trips
+        </h5>
         <div className="trip-list">
           {trips.map((trip) => (
             <div
@@ -239,13 +230,37 @@ const UploadTrip = () => {
             >
               <span>{trip.tripName}</span>
               <div>
-                <Button variant="link" className="me-2">
+                <Button
+                  variant="link"
+                  className="text-success"
+                  style={{
+                    fontFamily: "Roboto, sans-serif",
+                    fontSize: "16px",
+                    fontWeight: 400,
+                    lineHeight: "16px",
+                    letterSpacing: "0.01em",
+                    textAlign: "left",
+                    textDecoration: "none",
+                    border: "2px solid green",
+                    marginRight: "5px",
+                  }}
+                >
                   Open
                 </Button>
                 <Button
                   variant="link"
                   className="text-danger"
                   onClick={() => handleDeleteTrip(trip._id)}
+                  style={{
+                    fontFamily: "Roboto, sans-serif",
+                    fontSize: "16px",
+                    fontWeight: 400,
+                    lineHeight: "16px",
+                    letterSpacing: "0.01em",
+                    textAlign: "left",
+                    textDecoration: "none",
+                    border: "2px solid red",
+                  }}
                 >
                   Delete
                 </Button>
@@ -254,6 +269,9 @@ const UploadTrip = () => {
           ))}
         </div>
       </Container>
+
+      {/* {error && <Alert variant="danger">{error}</Alert>}
+      {message && <Alert variant="success">{message}</Alert>} */}
     </div>
   );
 };
